@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>新标签页</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- 头部区域 - 主题切换按钮 -->
+      <div class="header">
+        <button id="themeToggle" class="theme-toggle">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
+
+      <!-- 主要内容区域 -->
+      <main class="main-content">
+        <!-- Logo -->
+        <div class="logo-container">
+          <h1 class="logo">
+            <span class="logo-blue">G</span>
+            <span class="logo-red">o</span>
+            <span class="logo-yellow">o</span>
+            <span class="logo-blue">g</span>
+            <span class="logo-green">l</span>
+            <span class="logo-red">e</span>
+          </h1>
+        </div>
+
+        <!-- 搜索容器 -->
+        <div class="search-container">
+          <div class="search-box">
+            <!-- 搜索引擎选择器 -->
+            <div class="engine-selector">
+              <div class="engine-current" id="currentEngine">
+                <img
+                  src="../icons/engines/bing.ico"
+                  alt="Bing"
+                  class="engine-icon"
+                />
+                <span>Bing</span>
+                <i class="fas fa-chevron-down"></i>
+              </div>
+              <div class="engine-dropdown" id="engineDropdown">
+                <div class="engine-option" data-engine="google">
+                  <img src="../icons/engines/google.ico" alt="Google" />
+                  <span>Google</span>
+                </div>
+                <div class="engine-option" data-engine="bing">
+                  <img src="../icons/engines/bing.ico" alt="Bing" />
+                  <span>Bing</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 搜索输入框（移到图标左侧） -->
+            <input
+              type="text"
+              id="searchInput"
+              class="search-input"
+              placeholder="搜索 Google 或输入网址"
+            />
+
+            <!-- 搜索图标（移到右侧） -->
+            <div class="search-icon">
+              <i class="fas fa-search"></i>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
