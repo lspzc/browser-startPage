@@ -30,7 +30,7 @@ async function init() {
     setTheme(settings.theme || 'light');
 
     // 设置搜索引擎
-    setSearchEngine(settings.engine || 'google');
+    setSearchEngine(settings.engine || 'bing');
 
     // 设置事件监听器
     setupEventListeners();
