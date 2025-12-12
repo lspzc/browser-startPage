@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>lspzc起始页</title>
+    <title>起始页</title>
     <link rel="stylesheet" href="styles.css" />
     <link
       rel="stylesheet"
@@ -12,68 +12,141 @@
   </head>
   <body>
     <div class="container">
-      <!-- 头部区域 - 主题切换按钮 -->
       <div class="header">
-        <button id="themeToggle" class="theme-toggle">
+        <button id="settingsBtn" class="icon-btn" title="设置">
+          <i class="fas fa-cog"></i>
+        </button>
+        <button id="themeToggle" class="icon-btn" title="切换主题">
           <i class="fas fa-moon"></i>
         </button>
       </div>
 
-      <!-- 主要内容区域 -->
       <main class="main-content">
-        <!-- Logo -->
-        <div class="logo-container">
-          <h1 class="logo">
-            <span class="logo-blue">S</span>
-            <span class="logo-red">e</span>
-            <span class="logo-yellow">a</span>
-            <span class="logo-blue">r</span>
-            <span class="logo-green">c</span>
-            <span class="logo-red">h</span>
-          </h1>
+        <div id="logoWrapper" class="logo-wrapper">
+          <h1 id="textLogo" class="logo text-logo"></h1>
+
+          <div id="clockLogo" class="clock-container" style="display: none">
+            <div class="clock-date" id="clockDate"></div>
+            <div class="clock-time" id="clockTime">
+              <span id="clockHour">00</span><span class="colon">:</span
+              ><span id="clockMin">00</span><span class="colon">:</span
+              ><span id="clockSec">00</span>
+            </div>
+            <div class="clock-label" id="clockLabel"></div>
+          </div>
         </div>
 
-        <!-- 搜索容器 -->
         <div class="search-container">
-          <div class="search-box">
-            <!-- 搜索引擎选择器 -->
-            <div class="engine-selector">
-              <div class="engine-current" id="currentEngine">
-                <img
-                  src="../icons/engines/bing.ico"
-                  alt="Bing"
-                  class="engine-icon"
-                />
-                <span>Bing</span>
-                <i class="fas fa-chevron-down"></i>
-              </div>
-              <div class="engine-dropdown" id="engineDropdown">
-                <div class="engine-option" data-engine="google">
-                  <img src="../icons/engines/google.ico" alt="Google" />
-                  <span>Google</span>
-                </div>
-                <div class="engine-option" data-engine="bing">
-                  <img src="../icons/engines/bing.ico" alt="Bing" />
-                  <span>Bing</span>
-                </div>
-              </div>
+          <div class="search-box" id="searchBox">
+            <div class="search-icon">
+              <i class="fas fa-search"></i>
             </div>
-
-            <!-- 搜索输入框（移到图标左侧） -->
             <input
               type="text"
               id="searchInput"
               class="search-input"
-              placeholder=""
+              autocomplete="off"
             />
-
-            <!-- 搜索图标（移到右侧） -->
-            <div class="search-icon">
-              <i class="fas fa-search"></i>
-            </div>
+            <div
+              class="engine-indicator"
+              id="engineIndicator"
+              title="切换/当前搜索引擎"
+            ></div>
           </div>
         </div>
       </main>
+    </div>
+
+    <div id="settingsModal" class="modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>起始页设置</h2>
+          <button id="closeModal" class="close-btn">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="setting-group">
+            <label class="group-title">默认搜索引擎</label>
+            <div class="engine-options">
+              <div class="radio-option" data-value="bing">
+                <img src="../icons/engines/bing.ico" alt="Bing" />
+                <span>Bing</span>
+              </div>
+              <div class="radio-option" data-value="google">
+                <img src="../icons/engines/google.ico" alt="Google" />
+                <span>Google</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="setting-group">
+            <label class="group-title">Logo 模式</label>
+            <div class="select-wrapper">
+              <select id="logoModeSelect" class="form-select">
+                <option value="text">自定义文字</option>
+                <option value="clock">智能时钟</option>
+              </select>
+              <i class="fas fa-chevron-down select-arrow"></i>
+            </div>
+          </div>
+
+          <div id="textSettings" class="sub-settings">
+            <label>Logo 文字</label>
+            <input
+              type="text"
+              id="customLogoInput"
+              class="form-input"
+              placeholder="默认为 Search"
+            />
+          </div>
+
+          <div id="clockSettings" class="sub-settings" style="display: none">
+            <label>时钟类型</label>
+            <div class="select-wrapper">
+              <select id="clockTypeSelect" class="form-select">
+                <option value="normal">当前时间 (常规显示)</option>
+                <option value="countdown">下班倒计时 (循环模式)</option>
+              </select>
+              <i class="fas fa-chevron-down select-arrow"></i>
+            </div>
+
+            <div
+              id="timePickerGroup"
+              class="time-picker-group"
+              style="margin-top: 15px; display: none"
+            >
+              <div class="time-inputs-row">
+                <div class="time-input-col">
+                  <label>上班时间</label>
+                  <input
+                    type="time"
+                    id="workStartTime"
+                    class="form-input time-input"
+                  />
+                </div>
+                <div class="time-input-col">
+                  <label>下班时间</label>
+                  <input
+                    type="time"
+                    id="workEndTime"
+                    class="form-input time-input"
+                  />
+                </div>
+              </div>
+              <p class="setting-tip">
+                <i class="fas fa-info-circle"></i>
+                周一至周五计算距离下班时间，周末计算距离周一上班时间。
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button id="saveSettingsBtn" class="save-btn">
+            <i class="fas fa-check"></i> 保存并应用
+          </button>
+        </div>
+      </div>
     </div>
 
     <script src="script.js"></script>

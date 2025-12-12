@@ -1,48 +1,48 @@
-/* 全局样式重置 */
+/* 全局变量 */
+:root {
+    --bg-color: #ffffff;
+    --text-color: #202124;
+    --modal-bg: #ffffff;
+    --modal-overlay: rgba(0, 0, 0, 0.6);
+    --input-bg: #f1f3f4;
+    --border-color: #dfe1e5;
+    --search-shadow: 0 2px 8px rgba(32, 33, 36, 0.15);
+    --search-hover-shadow: 0 4px 12px rgba(32, 33, 36, 0.25);
+    --accent-color: #4285f4;
+    --accent-hover: #3367d6;
+    --button-hover: #f1f3f4;
+    --tip-color: #70757a;
+}
+
+[data-theme="dark"] {
+    --bg-color: #202124;
+    --text-color: #e8eaed;
+    --modal-bg: #292a2d;
+    /* 稍微提亮一点 */
+    --modal-overlay: rgba(0, 0, 0, 0.8);
+    --input-bg: #3c4043;
+    --border-color: #5f6368;
+    --search-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    --search-hover-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    --accent-color: #8ab4f8;
+    --accent-hover: #a1c3f9;
+    --button-hover: #3c4043;
+    --tip-color: #9aa0a6;
+}
+
+/* 基础重置 */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* 主题变量优化 */
-:root {
-    /* 亮色模式 */
-    --bg-color: #ffffff;
-    --text-color: #202124;
-    --search-bg: #ffffff;
-    --search-border: #dfe1e5;
-    --search-shadow: 0 2px 8px rgba(32, 33, 36, 0.15);
-    --button-hover: #f1f3f4;
-    /* Logo 颜色优化 */
-    --logo-blue: #4285f4;
-    --logo-red: #ea4335;
-    --logo-yellow: #fbbc05;
-    --logo-green: #34a853;
-}
-
-/* 暗色模式 */
-[data-theme="dark"] {
-    --bg-color: #202124;
-    --text-color: #e8eaed;
-    --search-bg: #303134;
-    --search-border: #5f6368;
-    --search-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
-    --button-hover: #3c4043;
-    /* 暗色模式 Logo 颜色优化 */
-    --logo-blue: #8ab4f8;
-    --logo-red: #f28b82;
-    --logo-yellow: #fdd663;
-    --logo-green: #81c995;
-}
-
-/* 页面基础样式优化 */
 body {
-    font-family: 'Google Sans', 'Roboto', Arial, sans-serif;
+    font-family: 'Google Sans', 'Roboto', sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
     min-height: 100vh;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s, color 0.3s;
 }
 
 .container {
@@ -52,261 +52,435 @@ body {
     padding: 0 20px;
 }
 
-/* 头部样式 */
+/* 头部 */
 .header {
-    padding: 16px 0;
+    padding: 20px;
     display: flex;
     justify-content: flex-end;
+    gap: 12px;
 }
 
-/* 主题切换按钮优化 */
-.theme-toggle {
-    background: none;
+.icon-btn {
+    background: transparent;
     border: none;
     color: var(--text-color);
-    font-size: 20px;
-    cursor: pointer;
-    padding: 8px;
-    border-radius: 50%;
-    transition: background-color 0.2s ease;
+    font-size: 18px;
     width: 40px;
     height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.2s;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.theme-toggle:hover {
+.icon-btn:hover {
     background-color: var(--button-hover);
 }
 
-/* 主要内容区域优化（居中+间距） */
+/* 主内容 */
 .main-content {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* 1. 取消垂直居中，改为靠顶部对齐 */
-    justify-content: flex-start;
-    /* 2. 控制顶部间距（数值越小，越靠上；越大，越靠下） */
-    padding-top: 150px;
-    /* 可根据需求调整，比如 50px/100px */
+    padding-top: 10vh;
+    /* 使用视口比例 */
 }
 
-/* Logo 美化（尺寸+间距+字体） */
-.logo-container {
-    margin-bottom: 36px;
-    /* 增加 Logo 与搜索框间距 */
-}
-
-.logo {
-    font-size: 92px;
-    /* 优化 Logo 大小 */
-    font-weight: 500;
-    letter-spacing: -12px;
-    /* 微调字母间距 */
-    user-select: none;
-    /* 禁止选中 Logo */
-}
-
-/* Logo 颜色 */
-.logo-blue {
-    color: var(--logo-blue);
-}
-
-.logo-red {
-    color: var(--logo-red);
-}
-
-.logo-yellow {
-    color: var(--logo-yellow);
-}
-
-.logo-green {
-    color: var(--logo-green);
-}
-
-/* 搜索容器优化 */
-.search-container {
-    width: 100%;
-    max-width: 588px;
-    /* 优化搜索框最大宽度 */
-}
-
-/* 搜索框美化（圆角+阴影+尺寸） */
-.search-box {
-    position: relative;
-    display: flex;
-    align-items: center;
-    background: var(--search-bg);
-    border: 1px solid var(--search-border);
-    border-radius: 28px;
-    /* 更大的圆角，更接近谷歌原版 */
-    padding: 0 20px;
-    height: 50px;
-    /* 优化高度 */
-    box-shadow: var(--search-shadow);
-    transition: all 0.2s ease;
-}
-
-/* 搜索框 hover 效果优化 */
-.search-box:hover {
-    box-shadow: 0 3px 10px rgba(32, 33, 36, 0.2);
-    border-color: transparent;
-    /* hover 时隐藏边框 */
-}
-
-/* 搜索引擎选择器优化 */
-.engine-selector {
-    position: relative;
-    margin-right: 12px;
-    width: 90px;
-    height: 80%;
-    display: flex;
-    align-items: center;
-}
-
-.engine-current {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    padding: 4px 8px;
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    color: var(--text-color);
-    width: 100%;
-    height: 100%;
-    border-radius: 12px;
-    font-size: 14px;
-}
-
-.engine-current:hover {
-    background-color: var(--button-hover);
-}
-
-.engine-icon {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-}
-
-/* 搜索引擎下拉框优化 */
-.engine-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 160px;
-    /* 加宽下拉框 */
-    background: var(--search-bg);
-    border: 1px solid var(--search-border);
-    border-radius: 12px;
-    /* 圆角优化 */
-    margin-top: 4px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-    display: none;
-    z-index: 1000;
-    overflow: hidden;
-}
-
-.engine-dropdown.active {
-    display: block;
-}
-
-.engine-option {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px 16px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    width: 100%;
-    font-size: 14px;
-}
-
-.engine-option:hover {
-    background-color: var(--button-hover);
-}
-
-.engine-option img {
-    width: 18px;
-    height: 18px;
-    border-radius: 50%;
-}
-
-/* 搜索输入框优化 */
-.search-input {
-    flex: 1;
-    background: transparent;
-    border: none;
-    color: var(--text-color);
-    font-size: 16px;
-    outline: none;
-    height: 100%;
-    padding: 0 8px;
-}
-
-.search-input::placeholder {
-    color: #9aa0a6;
-    font-size: 16px;
-    opacity: 0.8;
-}
-
-/* 搜索图标（移到右侧，样式优化） */
-.search-icon {
-    color: #9aa0a6;
-    font-size: 20px;
-    margin-left: 8px;
-    /* 与输入框的间距 */
-    width: 24px;
-    height: 24px;
+/* Logo 区域 */
+.logo-wrapper {
+    margin-bottom: 40px;
+    min-height: 120px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-/* 响应式优化（适配手机/平板） */
-@media (max-width: 768px) {
-    .logo {
-        font-size: 64px;
-        /* 移动端 Logo 缩小 */
-        letter-spacing: -8px;
-    }
+/* 文字 Logo */
+.text-logo {
+    font-size: 80px;
+    font-weight: 500;
+    user-select: none;
+    letter-spacing: -2px;
+}
 
-    .search-container {
-        max-width: 90%;
-    }
+/* 时钟 Logo */
+.clock-container {
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    animation: slideDown 0.4s ease-out;
+}
 
-    .search-box {
-        height: 46px;
-        padding: 0 16px;
-    }
+.clock-date {
+    font-size: 16px;
+    color: var(--tip-color);
+    margin-bottom: 4px;
+}
 
-    .engine-selector {
-        width: 80px;
-    }
+.clock-time {
+    font-size: 64px;
+    font-weight: 700;
+    line-height: 1.1;
+    white-space: nowrap;
+}
 
-    .engine-current span {
-        font-size: 13px;
-    }
+.clock-label {
+    font-size: 14px;
+    margin-top: 8px;
+    color: var(--accent-color);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    background: rgba(66, 133, 244, 0.1);
+    padding: 4px 12px;
+    border-radius: 12px;
+    display: inline-block;
+}
 
-    .search-input::placeholder {
-        font-size: 15px;
+.colon {
+    animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
     }
 }
 
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 搜索框 */
+.search-container {
+    width: 100%;
+    max-width: 580px;
+}
+
+.search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    height: 48px;
+    padding: 0 16px;
+    box-shadow: var(--search-shadow);
+    transition: all 0.2s;
+}
+
+.search-box:hover,
+.search-box:focus-within {
+    box-shadow: var(--search-hover-shadow);
+    background: var(--modal-bg);
+    border-color: transparent;
+}
+
+.search-icon {
+    color: #9aa0a6;
+    margin-right: 12px;
+    font-size: 16px;
+}
+
+.search-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    height: 100%;
+    font-size: 16px;
+    color: var(--text-color);
+    outline: none;
+}
+
+.engine-indicator {
+    width: 24px;
+    height: 24px;
+    margin-left: 10px;
+    cursor: pointer;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+    transition: 0.2s;
+}
+
+.engine-indicator:hover {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* --- 模态框优化 --- */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--modal-overlay);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    backdrop-filter: blur(2px);
+    /* 增加磨砂效果 */
+}
+
+.modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content {
+    background: var(--modal-bg);
+    width: 90%;
+    max-width: 420px;
+    border-radius: 16px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.2);
+    transform: scale(0.95);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex;
+    flex-direction: column;
+    max-height: 85vh;
+}
+
+.modal.active .modal-content {
+    transform: scale(1);
+}
+
+.modal-header {
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: var(--text-color);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* 模态框内容区 - 修复重叠关键 */
+.modal-body {
+    padding: 24px;
+    overflow-y: auto;
+    /* 允许滚动 */
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.group-title {
+    font-size: 14px;
+    color: var(--tip-color);
+    font-weight: 500;
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* 引擎单选卡片 */
+.engine-options {
+    display: flex;
+    gap: 12px;
+}
+
+.radio-option {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.radio-option img {
+    width: 20px;
+    height: 20px;
+}
+
+.radio-option.selected {
+    border-color: var(--accent-color);
+    background: rgba(66, 133, 244, 0.08);
+    color: var(--accent-color);
+    font-weight: 500;
+}
+
+/* 下拉框美化 */
+.select-wrapper {
+    position: relative;
+}
+
+.form-select {
+    width: 100%;
+    padding: 12px 16px;
+    padding-right: 40px;
+    appearance: none;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background: var(--input-bg);
+    color: var(--text-color);
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+}
+
+.select-arrow {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--tip-color);
+    pointer-events: none;
+    font-size: 12px;
+}
+
+/* 子设置区域美化 */
+.sub-settings {
+    background: var(--button-hover);
+    padding: 16px;
+    border-radius: 12px;
+    animation: fadeIn 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.sub-settings:focus-within {
+    border-color: var(--border-color);
+}
+
+.form-input {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.form-input:focus {
+    border-color: var(--accent-color);
+}
+
+/* 时间选择器行布局 */
+.time-inputs-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.time-input-col {
+    flex: 1;
+}
+
+.time-input-col label {
+    font-size: 12px;
+    color: var(--tip-color);
+    margin-bottom: 6px;
+    display: block;
+}
+
+/* 专门优化 type=time */
+input[type="time"] {
+    font-family: 'JetBrains Mono', monospace;
+    cursor: pointer;
+}
+
+/* 移除 webkit 原生时钟图标，让点击区域更统一 */
+input[type="time"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    filter: invert(0.5);
+    /* 适配深色模式 */
+}
+
+.setting-tip {
+    font-size: 12px;
+    color: var(--tip-color);
+    line-height: 1.5;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.modal-footer {
+    padding: 16px 24px;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: flex-end;
+}
+
+.save-btn {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.2s;
+}
+
+.save-btn:hover {
+    background: var(--accent-hover);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        margin-top: 0;
+    }
+
+    to {
+        opacity: 1;
+        margin-top: 15px;
+    }
+}
+
+/* 响应式 */
 @media (max-width: 480px) {
-    .logo {
+    .text-logo {
         font-size: 56px;
     }
 
-    .engine-current span {
-        display: none;
-        /* 超小屏隐藏引擎文字，只显示图标 */
+    .clock-time {
+        font-size: 48px;
     }
 
-    .engine-selector {
-        width: 40px;
+    .modal-content {
+        width: 95%;
+        max-height: 90vh;
+    }
+
+    .time-inputs-row {
+        flex-direction: column;
     }
 }
