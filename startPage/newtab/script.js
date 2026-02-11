@@ -18,7 +18,7 @@ const defaultSettings = {
     theme: 'light',
     engine: 'bing',
     logoMode: 'text',
-    customLogoText: ':-)',
+    customLogoText: 'lspzc',
     clockType: 'normal',
     workStartTime: '09:00',
     workEndTime: '18:00'
@@ -296,8 +296,15 @@ function setupEventListeners() {
         if (e.key === 'Enter') performSearch();
     });
     els.engineIndicator.addEventListener('click', () => {
-        // 点击图标也可以打开设置里的引擎选项，或者直接切换（这里只做触发搜索）
-        performSearch();
+        // 点击图标顺序切换搜索引擎
+        const engineKeys = Object.keys(searchEngines);
+        const currentIndex = engineKeys.indexOf(currentSettings.engine);
+        const nextIndex = (currentIndex + 1) % engineKeys.length;
+        const nextEngine = engineKeys[nextIndex];
+
+        currentSettings.engine = nextEngine;
+        setSearchEngine(nextEngine);
+        saveSettings({ engine: nextEngine });
     });
 
     // 主题切换
